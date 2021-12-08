@@ -9,4 +9,7 @@ hold on
 plot_gaussian(mu(:,1),sigma(:,:,1),'b')
 plot_gaussian(mu(:,2),sigma(:,:,2),'g')
 plot_gaussian(mu(:,3),sigma(:,:,3),'r')
+title("Ground Truth")
+ylim([1 7.5])
+xlim([0.1 7.5])
 hold off
