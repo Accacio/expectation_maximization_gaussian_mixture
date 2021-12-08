@@ -1,9 +1,9 @@
 function plot_gaussian(mu,sigma,color)
 % PLOT_GAUSSIAN -
-  [w, v] = eig(sigma)
+  [w, v] = eig(sigma);
 
   % Define max and min diameters and radii
-  diameters=2*sqrt(2)*sqrt(v)
+  diameters=2*sqrt(2)*sqrt(v);
   radii=diameters/2;
 
   % Define 0 centered ellipse points
