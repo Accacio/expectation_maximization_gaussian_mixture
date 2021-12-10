@@ -6,7 +6,7 @@ N=500;
 M=3;
 colors={'b','g','r'};
 
-% Generate and plot data
+%% Generate and plot data
 [pi,mu,Sigma,z,x]=generate_data(N,2);
 
 figure(1)
