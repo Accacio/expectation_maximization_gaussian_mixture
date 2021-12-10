@@ -30,7 +30,8 @@ hold off
 
 % Initalize uniform prior 1/M
 pi_hat=repmat(1/M,1,M);
-mu_hat=randn(2,3);
+% pick random subset of x
+mu_hat=x(:,randi(N,1,3))
 Sigma_hat(:,:,1:3)=repmat(eye(2),1,1,3);
 
 % getxz % set x and z equal to python code
