@@ -10,7 +10,8 @@ colors={'b','g','r'};
 [pi,mu,Sigma,z,x]=generate_data(N,2);
 
 figure(1)
-clf
+subplot(2,1,1)
+cla
 hold on
 for i=1:M
     z_i=find(z==i);
@@ -40,23 +41,39 @@ for emInd=1:emMaxIter
     responsabilities=calculate_responsabilities(x,mu_hat,Sigma_hat,pi_hat);
 
     % Plot based on responsabilites
-    figure(2)
-    clf
+    figure(1)
+    subplot(2,1,2)
+    cla
     plot_responsibles(x, responsabilities, mu_hat, Sigma_hat, pi,colors)
     title("EM")
 
     % Update parameters
     [mu_hat, Sigma_hat, pi_hat] = update_parameters(x, responsabilities, mu_hat, Sigma_hat, pi_hat);
-
+    for i=1:M
+    if ~isempty(find(eig(Sigma_hat(:,:,i))<=0))
+      Sigma_hat(:,:,i)=eye(2);
+    end
+    end
     % Calculate Log-marginal likelihood
     LML(:,emInd)=calculate_LML(x,mu_hat,Sigma_hat,pi_hat);
 end
 
-figure(2)
-clf
+figure(1)
+subplot(2,1,2)
+cla
 plot_responsibles(x, responsabilities, mu_hat, Sigma_hat, pi,colors)
 title("EM")
 
+%% Analyses
 figure(3)
 plot(1:emMaxIter,LML)
 title("log-marginal likelihood")
+
+[~,z_hat]=max(responsabilities,[],1);
+% Find the respective gaussian using the mean
+[~, idx] = min(sum((reshape(repmat(mu_hat,3,1),2,3,3)-mu).^2));
+for i=1:M
+  z_hat_mod(find(z_hat==i))=idx(i);
+end
+
+display(['Correctly estimated z: ' num2str(sum(z_hat_mod==z)/N*100) '%'])
