@@ -1,0 +1,4 @@
+#+TITLE: Expectation Maximization for Gaussian Mixture Model
+
+* Example
+[[./img/example.gif]]
