@@ -4,8 +4,9 @@ PI=pi;
 emMaxIter=70;
 N=500;
 M=3;
-colors={'b','g','r'};
 
+colorsgt={[ 0 0.447058823529412 0.741176470588235 ],[0.850980392156863   0.325490196078431   0.098039215686275],[0.929411764705882   0.694117647058824   0.125490196078431]};
+colors={[ .5 0.447058823529412 0.741176470588235 ],[0.850980392156863   0.825490196078431   0.098039215686275],[0.929411764705882   0.694117647058824   0.625490196078431]};
 %% Generate and plot data
 [pi,mu,Sigma,z,x]=generate_data(N,2);
 
@@ -16,12 +17,12 @@ hold on
 for i=1:M
     z_i=find(z==i);
     x_i=x(:,z_i);
-    scatter(x_i(1,:),x_i(2,:),10,colors{i})
+    scatter(x_i(1,:),x_i(2,:),10,colorsgt{i})
 end
 
 % Plot gaussians for comparison
 for i=1:M
-    plot_gaussian(mu(:,i),Sigma(:,:,i),colors{i})
+    plot_gaussian(mu(:,i),Sigma(:,:,i),colorsgt{i})
 end
 title("Ground Truth")
 hold off
